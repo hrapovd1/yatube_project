@@ -5,9 +5,17 @@ from typing import Any
 
 
 def index(request: HttpRequest) -> HttpResponse:
+    context = {
+        'index': 'Это главная страница проекта Yatube',
+    }
     template = 'posts/index.html'
-    return render(request, template)
+    return render(request, template, context)
 
 
 def group_posts(request: HttpRequest, slug: Any) -> HttpResponse:
-    return HttpResponse(f'А здесь посты из группы: {slug}')
+    context = {
+        'group_posts': 'Здесь будет информация о группах проекта Yatube',
+        'slug': slug,
+    }
+    template = 'posts/group.html'
+    return render(request, template, context)
