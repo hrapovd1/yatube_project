@@ -8,8 +8,9 @@ from .models import Group
 
 
 def index(request: HttpRequest) -> HttpResponse:
-    posts = Post.objects.order_by('-pub_date')[:5]
+    posts = Post.objects.order_by('-pub_date')[:10]
     context = {
+        'title': 'Последние обновления на сайте',
         'posts': posts
     }
     template = 'posts/index.html'
@@ -20,6 +21,7 @@ def group_posts(request: HttpRequest, slug: Any) -> HttpResponse:
     group = get_object_or_404(Group, slug=slug)
     posts = Post.objects.filter(group=group).order_by('-pub_date')[:10]
     context = {
+        'title': f'Записи сообщества {group.title}',
         'group': group,
         'posts': posts,
     }
